@@ -185,6 +185,14 @@ namespace pqs{
          template <pqs::in_mathematic_angle Lhs, pqs::in_mathematic_angle Rhs>
          friend constexpr pqs::undefined 
          operator + (Lhs const & lhs, Rhs const & rhs) { return {};}
+
+         template <pqs::in_mathematic_angle Lhs, pqs::in_number Rhs>
+         friend constexpr pqs::undefined 
+         operator + (Lhs const & lhs, Rhs const & rhs) { return {};}
+
+         template <pqs::in_number Lhs, pqs::in_mathematic_angle Rhs>
+         friend constexpr pqs::undefined 
+         operator + (Lhs const & lhs, Rhs const & rhs) { return {};}
          
         // addition only where exponent is the same
          template <pqs::in_mathematic_angle Lhs, pqs::in_mathematic_angle Rhs>
@@ -202,6 +210,14 @@ namespace pqs{
 
           // subtraction not allowed where exponent is not same
          template <pqs::in_mathematic_angle Lhs, pqs::in_mathematic_angle Rhs>
+         friend constexpr pqs::undefined 
+         operator - (Lhs const & lhs, Rhs const & rhs) { return {};}
+
+         template <pqs::in_mathematic_angle Lhs, pqs::in_number Rhs>
+         friend constexpr pqs::undefined 
+         operator - (Lhs const & lhs, Rhs const & rhs) { return {};}
+
+         template <pqs::in_number Lhs, pqs::in_mathematic_angle Rhs>
          friend constexpr pqs::undefined 
          operator - (Lhs const & lhs, Rhs const & rhs) { return {};}
          
@@ -523,9 +539,9 @@ int main()
    static_assert(pqs::in_mathematic_angle<std::remove_const_t<decltype(v1b)> > );
    std::cout << "v1b = " << v1b << '\n';
 
+// n/a
 //   auto constexpr v1c = v1 + v1b ;
-//   static_assert(pqs::in_arithmetic<std::remove_const_t<decltype(v1c)> > );
-//   std::cout << "v1c = " << v1c << '\n';
+
 
    auto constexpr v2 = v1 * 2;
    static_assert(pqs::in_mathematic_angle<std::remove_const_t<decltype(v2)> > );
@@ -533,18 +549,20 @@ int main()
 
    auto constexpr v3 = 2 * v1;
    auto constexpr v4 = v2 * v3;
+  // n/a
  //  auto constexpr v4a = v2 + v4;
    auto constexpr v5 = 1.0 / v1;
    auto constexpr v6 = v1 / 2.0;
    auto constexpr v7 = v1 / v1;
+   static_assert(pqs::in_number<std::remove_const_t<decltype(v7)> >,"");
    auto constexpr v8 = v1 * v5;
 
-   // implicit add/subtract with real
-   auto constexpr v9 = v1 + 1.0;
-   auto constexpr v9a = 1.0 + v1;
+  // n/a
+  // auto constexpr v9 = v1 + 1.0;
+  // auto constexpr v9a = 1.0 + v1;
 
-   auto constexpr v9b = v1 - 1.0;
-   auto constexpr v9c = 1.0 - v1;
+  // auto constexpr v9b = v1 - 1.0;
+  // auto constexpr v9c = 1.0 - v1;
 
   //compare
    auto constexpr b1 = v1 < v2;
@@ -554,6 +572,7 @@ int main()
    auto constexpr b5 = v1 >= v2;
    auto constexpr b6 = v1 > v2;
 
+  // n/a
   // auto constexpr b6a = v4 < v2;
   // auto constexpr b7 = v1 < 1.0;
 
