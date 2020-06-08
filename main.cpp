@@ -138,13 +138,12 @@ namespace pqs{
             ( in_mathematic_angle<Lhs> && ( in_mathematic_angle<Rhs> || in_number<Rhs>));
    }//detail
 
-}
+
    // exclusive namespace for mathematic_angle functions
-   namespace pqs_mathematic_angle_space{
+   namespace mathematic_angle_space{
       /**
        * @brief An exclusive base class for mathematic_angle which contains hidden Friend functions for mathematic_angle
        * without asymmetry of names,args, params caused by being in the mathematic_angle class itself
-       * TODO : move to another namespace for less cluttered lookup. Does that make a difference?
        */
       class functions{
 
@@ -471,10 +470,11 @@ namespace pqs{
 
    }// mathematic_angle_space
 
-namespace pqs{
-
+   /**
+   *  mathematic angle class template
+   */
    template <in_real_number ValueType, in_non_zero_ratio Exponent>
-   class mathematic_angle : public pqs_mathematic_angle_space::functions{
+   class mathematic_angle : public mathematic_angle_space::functions{
    public:
 
       using exponent = typename Exponent::type;
