@@ -138,9 +138,8 @@ namespace pqs{
             ( in_mathematic_angle<Lhs> && ( in_mathematic_angle<Rhs> || in_number<Rhs>));
    }//detail
 
-
    // exclusive namespace for mathematic_angle functions
-   namespace mathematic_angle_space{
+   namespace mathematic_angle_impl{
       /**
        * @brief An exclusive base class for mathematic_angle which contains hidden Friend functions for mathematic_angle
        * without asymmetry of names,args, params caused by being in the mathematic_angle class itself
@@ -468,13 +467,13 @@ namespace pqs{
          }
       };
 
-   }// mathematic_angle_space
+   } // mathematic_angle_impl
 
    /**
    *  mathematic angle class template
    */
    template <in_real_number ValueType, in_non_zero_ratio Exponent>
-   class mathematic_angle : public mathematic_angle_space::functions{
+   class mathematic_angle : public pqs::mathematic_angle_impl::functions{
    public:
 
       using exponent = typename Exponent::type;
@@ -555,10 +554,7 @@ int main()
    auto constexpr b5 = v1 >= v2;
    auto constexpr b6 = v1 > v2;
 
- //  auto constexpr b6a = v4 < v2;
-
-   // N.B implicit conversion from real
-   // implicit conversion to real
+  // auto constexpr b6a = v4 < v2;
   // auto constexpr b7 = v1 < 1.0;
 
    double constexpr x = v1;
@@ -581,7 +577,7 @@ int main()
 
 
    // should fail
-   //pqs::mathematic_angle<int,std::ratio<2> > constexpr ri = 1;
+  // pqs::mathematic_angle<int,std::ratio<2> > constexpr ri = 1;
 
 }
 
